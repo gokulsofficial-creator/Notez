@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    <!-- <span style="width: 25px;">{{ user.username }}</span> -->
+    <a href="{% url 'core:add_note' %}">Add Note</a>
+
+    
+
+    <center><h1>Welcome to Notes Website</h1></center>
+    <!-- <p>Create Notes Efficiently</p> -->
+
+    
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for note in notes %}
+        <div class="col">
+            <div class="card h-100 w-50">
+                <div class="card-body">
+                    <h5 class="card-title">{{ note.title }}</h5>
+                    <p class="card-text">{{ note.content }}</p>
+
+                    <!-- IMPORTANT: note.id must exist -->
+                    <a href="{% url 'core:edit_note' note.id %}" class="card-link">Edit</a>
+                    <a href="{% url 'core:delete_note' note.id %}" class="card-link">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No notes available</p>
+        {% endfor %}
+    </div>
+
+{% endblock %}
